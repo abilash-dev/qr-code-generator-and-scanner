@@ -1,0 +1,30 @@
+/*
+
+© abilash-dev | https://github.com/abilash-dev/qr-code-generator-and-scanner
+
+*/
+
+body.dark {
+    background-color: #1e1e1e;
+    color: #fff;
+}
+
+.dark .border-gray-200 {
+    border-color: #444;
+}
+
+.dark .text-gray-dark {
+    color: #070707;
+}
+
+.dark .bg-gray-600 {
+    background-color: #333;
+}
+
+.dark .hover\:bg-black:hover {
+    background-color: #444;
+}
+
+#spinner {
+    display: none;
+}

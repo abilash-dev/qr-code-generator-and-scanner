@@ -1,0 +1,91 @@
+<!--
+
+© abilash-dev | https://github.com/abilash-dev/qr-code-generator-and-scanner
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Generate and Scan QR Codes" />
+    <meta name="keywords" content="qr code, qr code scanner, create qr code, scan qr, online qr code generator, online qr code scanner" />
+    <meta property="og:title" content="QR Code Generator & Scanner">
+    <meta property="og:type" content="website">
+    <meta property="og:theme-color" content="#FFFFF">
+    <meta property="og:image" content="https://img.icons8.com/3d-fluency/94/qr-code-1.png">
+    <meta name="twitter:card" content="summary">
+
+    <link rel="icon" type="image/png" href="https://img.icons8.com/3d-fluency/94/qr-code-1.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+    <title>QR Code Generator & Scanner</title>
+  </head>
+  <body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+    <header class="p-4 mb-10 bg-blue-600">
+      <div class="max-w-5xl m-auto">
+        <div class="text-2xl font-bold text-white">Online QR Code Generator and Scanner</div>
+      </div>
+    </header>
+    <main>
+      <div class="flex flex-col-reverse align-center justify-center m-auto md:max-w-5xl p-10 md:flex-row md:gap-10">
+        <!-- QR Code Generator -->
+        <div class="w-full md:w-1/2">
+          <h1 class="text-3xl font-bold mb-5 md:text-4xl">QR Code Generator</h1>
+          <p>Enter your URL or text below to generate a QR Code and Download the image.</p>
+          <form id="generate-form" class="mt-4">
+            <input id="content" type="text" placeholder="Enter URL or text" class="w-full border-2 border-gray-200 rounded p-3 text-gray-dark mb-5 focus:outline-none" required />
+            <select id="size" class="w-full border-2 border-gray-200 rounded p-3 text-gray-dark focus:outline-none">
+              <option value="100">100x100</option>
+              <option value="200" selected>200x200</option>
+              <option value="300">300x300</option>
+              <option value="400">400x400</option>
+              <option value="500">500x500</option>
+              <option value="600">600x600</option>
+              <option value="700">700x700</option>
+            </select>
+            <button class="bg-blue-600 rounded w-full text-white py-3 px-4 mt-5 hover:bg-blue-800" type="submit">Generate QR Code</button>
+          </form>
+          <div id="generated" class="text-center mt-6">
+            <div id="spinner">
+              <svg class="inline w-24 h-24 animate-spin text-gray-200 dark:text-gray-600 fill-pink-600" viewBox="0 0 100 101">
+                <path fill="currentColor" d="M100 50.59c0 27.614-22.386 50-50 50S0 78.204 0 50.59 22.386.59 50 .59s50 22.386 50 50z" />
+                <path fill="currentFill" d="M93.968 39.041c2.425-.637 3.895-3.13 3.04-5.488A49.91 49.91 0 0 0 89.817 20.348C85.845 15.119 80.883 10.724 75.212 7.413 69.542 4.102 63.275 1.94 56.77 1.05a49.87 49.87 0 0 0-15.035.229c-2.473.415-3.921 2.919-3.284 5.344.637 2.426 3.12 3.849 5.6 3.485a39.918 39.918 0 0 1 14.807-.058c5.325.728 10.453 2.497 15.094 5.207 4.641 2.71 8.702 6.308 11.952 10.587a39.929 39.929 0 0 1 5.596 10.035c.902 2.34 3.361 3.803 5.787 3.166z" />
+              </svg>
+            </div>
+            <div id="qrcode" class="m-auto mt-4"></div>
+            <button id="save-btn" class="bg-blue-600 rounded w-48 text-white py-3 px-4 mt-5 hover:bg-blue-800" style="display: none">Save QR Code</button>
+          </div>
+        </div>
+
+        <!-- QR Code Scanner -->
+        <div class="w-full md:w-1/2">
+            <h2 class="text-3xl font-bold mb-5">QR Code Scanner</h2>
+            <div id="reader" class="w-full rounded border border-gray-400 mb-4" style="aspect-ratio: 1.25;"></div>
+            <input type="file" accept="image/*" id="qr-upload" class="block mb-3 text-sm text-gray-700 file:bg-blue-600 file:text-white file:px-4 file:py-2 file:rounded hover:file:bg-blue-800" />
+
+        <div id="scan-result-box" class="hidden mt-4">
+            <textarea id="scan-result" readonly class="w-full border-2 border-gray-300 rounded p-3 text-gray-dark dark:text-white dark:bg-gray-800" rows="3"></textarea>
+            <button id="copy-btn" class="bg-blue-600 rounded w-full text-white py-3 px-4 mt-3 hover:bg-blue-800">Copy Scanned Text</button>
+        </div>
+       </div>
+      </div>
+    </main>
+    <script src="js/script.js"></script>
+    <footer style="font-family: 'Roboto', sans-serif; margin-top: 40px; padding: 15px; text-align: center; font-size: 13px; color: #666;">
+        <p>&copy; <script>document.write(new Date().getFullYear());</script> abilash-dev </p>
+        <p><a href="https://abilash.link" target="_blank" style="color: #2196F3; text-decoration: none;">Abilash.Link</a> | <a href="https://github.com/abilash-dev/qr-code-generator-and-scanner" target="_blank" style="color: #2196F3; text-decoration: none;">Github Project</a></p>
+    </footer>
+  </body>
+</html>
