@@ -3,6 +3,8 @@
 A simple HTML-based web application to **generate QR codes** from any URL or text, and **scan QR codes** using your device camera or by uploading an image.  
 Built with HTML, CSS, and JavaScript.
 
+[Live Demo](https://abilash-dev.github.io/qr-code-generator-and-scanner/)
+
 ---
 
 ## Features
