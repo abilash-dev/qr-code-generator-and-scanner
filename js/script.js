@@ -46,26 +46,13 @@ saveBtn.addEventListener('click', () => {
 
 const resultElem = document.getElementById('scan-result');
 const html5QrCode = new Html5Qrcode("reader");
-Html5Qrcode.getCameras().then(devices => {
-    if (devices.length) {
-        html5QrCode.start(
-            { facingMode: "environment" },
-            { fps: 10, qrbox: 250 },
-            qrCodeMessage => {
-                resultElem.textContent = `Scanned: ${qrCodeMessage}`;
-                html5QrCode.stop();
-            },
-            errorMsg => { }
-        );
-    }
-});
 
 document.getElementById('qr-upload').addEventListener('change', e => {
     if (e.target.files.length === 0) return;
     const file = e.target.files[0];
     html5QrCode.scanFile(file, true)
         .then(decodedText => showResult(decodedText))
-        .catch(err => showResult('Error scanning QR code.'));
+        .catch(err => showResult('QR code not found.'));
 });
 
 copyBtn.addEventListener('click', () => {
